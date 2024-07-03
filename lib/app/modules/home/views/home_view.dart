@@ -1,7 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -9,8 +8,9 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      backgroundColor: Colors.white70,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Stack(
           children: [
@@ -45,43 +45,57 @@ class HomeView extends GetView<HomeController> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 25.0, right: 25, bottom: 80, top: 200),
                 child: Container(
-
-                  color: Colors.white,
+                  decoration: BoxDecoration(
+                    color:Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black12,
+                        blurRadius: 10,
+                        spreadRadius: 5,
+                      ),
+                    ],
+                  ),
                   child: Column(
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.only(left: 35.0, right: 35, top: 20),
+                       Padding(
+                        padding: const EdgeInsets.only(left: 35.0, right: 35, top: 20),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
                               children: [
-                                Icon(Icons.cases_outlined, color: Colors.green),
-                                SizedBox(width: 10),
+                                const Icon(Icons.cases_outlined, color: Colors.green),
+                                const SizedBox(width: 10),
                                 Column(
                                   children: [
-                                    Text("Sunday"),
-                                    SizedBox(height: 5),
-                                    Text("20-02-2022"),
+                                    Text(controller.currentDay.value),
+                                    const SizedBox(height: 5),
+                                    Text(controller.currentDate.value),
                                   ],
                                 ),
                               ],
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
+
                             Row(
                               children: [
-                                Icon(
-                                  Icons.access_time_filled,
-                                  color: Colors.green,
+                                Container(
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.green
+                                  ),
+                                  child: const Column(
+                                    children: [
+                                      Icon(
+                                        Icons.access_time_filled,
+                                        color: Colors.white,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                SizedBox(width: 10),
-                                Column(
-                                  children: [
-                                    Text("Sunday"),
-                                    SizedBox(height: 5),
-                                    Text("20-02-2022"),
-                                  ],
-                                ),
+                                const SizedBox(width: 10),
+                               Text(controller.currentTime.value),
                               ],
                             ),
                           ],
@@ -104,7 +118,7 @@ class HomeView extends GetView<HomeController> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          controller?.navigateToScan(); // Navigate on button tap
+                          controller.navigateToScan(); // Navigate on button tap
                         },
                         child: Image.asset(
                           "assets/button_scan.png",
